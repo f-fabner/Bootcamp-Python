@@ -2,6 +2,7 @@ import os
 from art import logo
 print(logo)
 
+
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
