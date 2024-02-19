@@ -1,6 +1,6 @@
 STARTING_POSITION = (0, -280)
 MOVE_DISTANCE = 10
-FINISH_LINE_Y = 280
+FINISH_LINE_Y = 251
 
 from turtle import Turtle
 
@@ -18,12 +18,13 @@ class Player(Turtle):
         self.lvl_map = 1
         
     def up(self):
-        self.forward(10)
+        self.forward(MOVE_DISTANCE)
     
     def down(self):
-        self.forward(-10)
+        self.forward(-MOVE_DISTANCE)
         
     def goal(self):
         if self.ycor() >= FINISH_LINE_Y:
             self.lvl_map += 1
             self.goto(STARTING_POSITION)
+
