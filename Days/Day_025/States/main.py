@@ -1,48 +1,47 @@
 import turtle
-import pandas as pd
-
-def move_turtle(x,y):
-    turtle.penup()
-    turtle.goto(x, y)
-    turtle.pendown()
+import pandas
 
 screen = turtle.Screen()
-screen.title("Brazil States Game!")
-image = "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_025/States/estados_em_branco.gif"
+screen.title("Brazil. States Game")
+image = "N:\Programando\ProjetosGit\Bootcamp-Python\Days\Day_025\States\estados_em_branco.gif"
 screen.addshape(image)
 turtle.shape(image)
 
+data = pandas.read_csv("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_025/States/27_states.csv")
+all_states = data.state.to_list()
+guessed_states = []
+
+#def get_mouse(x, y):
+#    print(x, y)
+
+#turtle.onscreenclick(get_mouse)
+#turtle.mainloop()
+
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f"{len(guessed_states)}/27 States Correct",
+                                    prompt="What's another state's name?").title()
+    if answer_state == "Exit":
+        missing_states = []
+        for state in all_states:
+            if state not in guessed_states:
+                missing_states.append(state)
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_025/States/states_to_learn.csv")
+        break
+    if answer_state in all_states:
+        guessed_states.append(answer_state)
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        state_data = data[data.state == answer_state]
+        t.goto(int(state_data.x), int(state_data.y))
+        t.write(answer_state)
 
 
 '''
-def click_coor(x, y):
-    print(x, y)
-    
-turtle.onscreenclick(click_coor)
-
-turtle.mainloop()
+Mato Grosso do Sul 
+Rio de Janeiro
+Rio Grande do Norte
+Rio Grande do Sul
+I don't know why, but the 4 states above don't appear at all, I've already changed the coordinate, I've already checked the clicks, and nothing, these 4 still don't appear on the map after getting it right...
 '''
-file_path = "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_025/States/27_states.csv"
-states_data = pd.read_csv(file_path)
-
-total_states = len(states_data)
-correct_guesses = 0
-
-game_is_on = True
-
-while correct_guesses < total_states:
-    answer_state = screen.textinput(title="Guess the State", prompt="What's another state's name?").capitalize()
-
-    if answer_state.lower() == "exit":
-        break  
-    
-    if answer_state in states_data["state"].values:
-        state_info = states_data[states_data["state"] == answer_state].iloc[0]
-        x, y = state_info["x"], state_info["y"]
-
-        move_turtle(x, y)
-        turtle.write(answer_state, align="center", font=("Arial", 12, "normal"))
-        correct_guesses += 1
-
-
-screen.exitonclick()
