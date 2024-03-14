@@ -1,7 +1,7 @@
 import pandas
 
 data = pandas.read_csv(
-    "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/nato_with_try/nato_phonetic_alphabet.csv")
+    "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_030/nato_with_try/nato_phonetic_alphabet.csv")
 
 phonetic_dict = {row.letter: row.code for (index, row) in data.iterrows()}
 

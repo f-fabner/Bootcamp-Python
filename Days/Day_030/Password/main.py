@@ -46,17 +46,17 @@ def buttonadd():
             title="Error!", message="Please don't leave any fields empty!")
     else:
         try:
-            with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/Password/data.json", "r") as data_file:
+            with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_030/Password/data.json", "r") as data_file:
                 #reading old data
                 data = json.load(data_file)
         except FileNotFoundError:
-            with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/Password/data.json", "w") as data_file:
+            with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_030/Password/data.json", "w") as data_file:
                 json.dump(new_data, data_file, indent=4)
         else:  
             #updating old data with new data
             data.update(new_data)
                 
-            with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/Password/data.json", "w") as data_file:
+            with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_030/Password/data.json", "w") as data_file:
                 #Saving updated data
                 json.dump(data, data_file, indent=4)
         finally:        
@@ -67,7 +67,7 @@ def buttonadd():
 def find_password():
     website = input_site.get()
     try:
-        with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/Password/data.json") as data_file:
+        with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_030/Password/data.json") as data_file:
             data = json.load(data_file)
     except FileNotFoundError:
         messagebox.showinfo(title="Error", message="No Data File Found.")
@@ -87,7 +87,7 @@ window.config(padx=50, pady=50, bg=LILAC)
 # label padlock
 canvas = Canvas(height=200, width=200, bg=LILAC, highlightthickness=0)
 padlock_img = PhotoImage(
-    file="N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/Password/logo.png")
+    file="N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_030/Password/logo.png")
 canvas.create_image(100, 100, image=padlock_img)
 canvas.grid(column=1, row=0, padx=(0, 100))
 
