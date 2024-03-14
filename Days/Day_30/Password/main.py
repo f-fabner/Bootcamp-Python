@@ -54,7 +54,7 @@ def buttonadd():
                 json.dump(new_data, data_file, indent=4)
         else:  
             #updating old data with new data
-            json.update(new_data)
+            data.update(new_data)
                 
             with open("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_30/Password/data.json", "w") as data_file:
                 #Saving updated data
