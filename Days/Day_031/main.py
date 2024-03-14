@@ -3,11 +3,19 @@ import pandas
 import random
 
 BACKGROUND_COLOR = "#B1DDC6"
-
-data = pandas.read_csv(
-    "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_031/data/french_words.csv")
-to_learn = data.to_dict(orient="records")
 current_card = {}
+to_learn = {}
+try:
+    data = pandas.read_csv(
+    "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_031/data/words_to_learn.csv")
+except FileNotFoundError:
+    original_data = pandas.read_csv(
+    "N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_031/data/french_words.csv")
+    to_learn = original_data.to_dict(orient="records")
+else:
+    to_learn = data.to_dict(orient="records")
+
+
 
 # ************************DEFS************************
 
@@ -30,12 +38,11 @@ def flip_card():
     canvas.itemconfig(card_background, image=back_card_img)
 
 
-def right():
-    pass
-
-
-def wrong():
-    pass
+def know():
+    to_learn.remove(current_card)
+    data = pandas.DataFrame(to_learn)
+    data.to_csv("N:/Programando/ProjetosGit/Bootcamp-Python/Days/Day_031/data/words_to_learn.csv", index=False)
+    next_card()
 
 # ************************UI************************
 
@@ -66,10 +73,10 @@ wrong_img = PhotoImage(
 
 
 # ************************BUTTONS************************
-# Button ADD
-button_right = Button(image=right_img, highlightthickness=0, command=next_card)
+# Button right
+button_right = Button(image=right_img, highlightthickness=0, command=know)
 button_right.grid(column=1, row=1)
-# Button Search
+# Button wrong
 button_wrong = Button(image=wrong_img, highlightthickness=0, command=next_card)
 button_wrong.grid(column=0, row=1)
 
